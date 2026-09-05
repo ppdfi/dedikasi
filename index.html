@@ -34,6 +34,10 @@
         color: #1e3a8a;
         text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
       }
+      .sub-title {
+        font-size: 0.9rem;
+        color: #6b7280;
+      }
       .menu-card { 
         border: none;
         border-radius: 16px;
@@ -41,13 +45,18 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         overflow: hidden;
+        position: relative;
       }
       .menu-card:hover { 
         transform: translateY(-5px);
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
       }
-      .bg-grad-blue { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
-      .bg-grad-green { background: linear-gradient(135deg, #10b981, #047857); }
+      .bg-grad-blue {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      }
+      .bg-grad-green {
+        background: linear-gradient(135deg, #10b981, #047857);
+      }
       .card-custom {
         border: none;
         border-radius: 16px;
@@ -57,12 +66,19 @@
       .badge-lunas {
         background-color: #d1fae5 !important;
         color: #065f46 !important;
-        font-weight: 600; padding: 6px 12px; border-radius: 20px; display: inline-block;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 20px;
+        display: inline-block;
       }
       .badge-belum {
         background-color: #fee2e2 !important;
         color: #dc2626 !important;
-        font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1px solid #fca5a5; display: inline-block;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 20px;
+        border: 1px solid #fca5a5;
+        display: inline-block;
       }
       .hidden { display: none !important; }
     </style>
@@ -73,10 +89,16 @@
       
       <!-- AREA HEADER -->
       <div class="d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-start mb-5 gap-3 gap-md-4">
+        <!-- 1. Logo di Samping Kiri -->
         <img src="https://github.com/ppdfi/aset/blob/main/LogoWebApp/DEDIKASI.png?raw=true" alt="Logo DEDIKASI" width="130" style="filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.15));">
+        <!-- 2. Area Teks Kanan -->
         <div>
-          <h1 class="main-title mb-0" style="font-size: 3.2rem; font-weight: 800; letter-spacing: 1px; line-height: 1;">DEDIKASI</h1>
-          <h5 class="fw-bold mt-2 mb-3" style="color: #1e3a8a; font-size: 1.15rem; letter-spacing: 0.5px;">Data Pelunasan Pendidikan & Dekosan Santri</h5>
+          <h1 class="main-title mb-0" style="font-size: 3.2rem; font-weight: 800; letter-spacing: 1px; line-height: 1;">
+            DEDIKASI
+          </h1>
+          <h5 class="fw-bold mt-2 mb-3" style="color: #1e3a8a; font-size: 1.15rem; letter-spacing: 0.5px;">
+            Data Pelunasan Pendidikan & Dekosan Santri
+          </h5>
           <div class="d-inline-flex align-items-center bg-white px-3 py-2 rounded-pill shadow-sm border" style="border-color: #e5e7eb !important;">
             <i class="fa-solid fa-mosque fs-6 me-2" style="color: #10b981;"></i>
             <span class="text-secondary fw-semibold" style="font-size: 0.95rem;">Pondok Pesantren Darul Fawaid Ilmiyah</span>
@@ -154,7 +176,7 @@
           </div>
           <div class="d-flex gap-2 justify-content-end">
             <button type="button" class="btn btn-light" onclick="kembaliKeMenu()">Kembali</button>
-            <button type="submit" id="btnSimpan" class="btn btn-primary">Simpan Transaksi</button>
+            <button type="submit" id="btnSimpan" class="btn">Simpan Transaksi</button>
           </div>
         </form>
       </div>
@@ -170,6 +192,7 @@
               <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 10px 0 0 10px;">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </span>
+              <!-- Debounce diterapkan disini: oninput="debounceFilter()" -->
               <input type="text" id="kotakCari" class="form-control border-start-0" placeholder="Cari nama, bulan, atau pengurus..." oninput="debounceFilter()" style="border-radius: 0 10px 10px 0; padding: 8px 12px;">
             </div>
           </div>
@@ -188,6 +211,7 @@
             <tbody id="kontainerRiwayat"></tbody>
           </table>
           
+          <!-- TOMBOL LOAD MORE (TAMPILKAN 10 LAGI) -->
           <div id="loadMoreContainer" class="text-center p-3 hidden border-top">
             <button class="btn btn-outline-primary rounded-pill px-4 fw-medium" onclick="muatLebihBanyak()">
               Tampilkan 10 lagi <i class="fa-solid fa-chevron-down ms-1"></i>
@@ -197,7 +221,7 @@
       </div>
     </div>
 
-    <!-- MODAL NOTIFIKASI -->
+    <!-- MODAL NOTIFIKASI INTERAKTIF -->
     <div class="modal fade" id="notifModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
@@ -211,16 +235,19 @@
       </div>
     </div>
 
+    <!-- SCRIPT BOOTSTRAP UNTUK MODAL NOTIFIKASI -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      // URL DEPLOYMENT APPS SCRIPT ANDA
+      // ===============================================
+      // URL APP SCRIPT BARU SESUAI PERMINTAAN
+      // ===============================================
       const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxxul62P2N6QFssZhEurhQrb9bVKM_t9kBMnuKh6eezNSdLxHXMb7BDO3N8SU8uLW79_A/exec";
 
       let semuaDataRiwayat = [];
       let dataTersaring = [];
       let jumlahTampil = 10;
-      let filterTimeout; 
+      let filterTimeout; // Untuk fitur debounce agar tidak berat saat mengetik
 
       window.onload = function() {
         muatDropdownSantri();
@@ -228,9 +255,12 @@
       };
 
       function tampilkanNotifikasi(judul, pesan, tipe) {
-        let iconHTML = tipe === 'sukses' 
-          ? '<i class="fa-solid fa-circle-check text-success" style="font-size: 4rem;"></i>' 
-          : '<i class="fa-solid fa-circle-xmark text-danger" style="font-size: 4rem;"></i>';
+        let iconHTML = '';
+        if (tipe === 'sukses') {
+          iconHTML = '<i class="fa-solid fa-circle-check text-success" style="font-size: 4rem;"></i>';
+        } else if (tipe === 'gagal') {
+          iconHTML = '<i class="fa-solid fa-circle-xmark text-danger" style="font-size: 4rem;"></i>';
+        }
         
         document.getElementById('notifIcon').innerHTML = iconHTML;
         document.getElementById('notifTitle').innerText = judul;
@@ -248,7 +278,9 @@
           .then(res => res.json())
           .then(santriList => {
             select.innerHTML = '<option value="" disabled selected>Pilih nama santri...</option>';
-            santriList.forEach(nama => { select.innerHTML += `<option value="${nama}">${nama}</option>`; });
+            santriList.forEach(nama => {
+              select.innerHTML += `<option value="${nama}">${nama}</option>`;
+            });
           })
           .catch(err => select.innerHTML = `<option value="" disabled selected>Error memuat data</option>`);
       }
@@ -265,7 +297,7 @@
           .then(data => {
             semuaDataRiwayat = data;
             dataTersaring = data;
-            jumlahTampil = 10; 
+            jumlahTampil = 10;
             renderTabel();
           })
           .catch(err => kontainerRiwayat.innerHTML = '<tr><td colspan="8" class="text-center text-danger">Gagal memuat tabel riwayat.</td></tr>');
@@ -274,44 +306,45 @@
       function renderTabel() {
         const kontainerRiwayat = document.getElementById('kontainerRiwayat');
         const btnLoadMore = document.getElementById('loadMoreContainer');
-        
-        if (dataTersaring.length === 0) {
+        kontainerRiwayat.innerHTML = '';
+
+        if (!dataTersaring || dataTersaring.length === 0) {
           kontainerRiwayat.innerHTML = '<tr><td colspan="8" class="text-center py-4 text-muted">Belum ada riwayat atau data tidak ditemukan.</td></tr>';
           btnLoadMore.classList.add('hidden');
           return;
         }
 
         const dataDitampilkan = dataTersaring.slice(0, jumlahTampil);
-        let rowsHtml = '';
 
         dataDitampilkan.forEach(row => {
-          const statusVal = row.status ? row.status.toLowerCase() : "";
-          const isLunas = statusVal.includes('lunas');
+          const status = row.status ? row.status.toLowerCase() : "";
+          const isLunas = status.includes('lunas') && !status.includes('belum');
           const badgeClass = isLunas ? 'badge-lunas' : 'badge-belum';
-          const nominalVal = Number(row.nominal) || 0;
           
-          let tombolBukti = row.bukti && row.bukti !== "#" 
-            ? `<a href="${row.bukti}" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3"><i class="fa-solid fa-eye me-1"></i> Lihat</a>`
-            : `<span class="text-muted small">Tanpa Bukti</span>`;
-            
-          rowsHtml += `
+          let htmlBukti = `<span class="text-muted small">Tanpa Bukti</span>`;
+          if (row.bukti && row.bukti !== "#" && row.bukti !== "") {
+            htmlBukti = `<a href="${row.bukti}" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3"><i class="fa-solid fa-eye me-1"></i> Lihat</a>`;
+          }
+
+          kontainerRiwayat.innerHTML += `
             <tr>
               <td class="ps-3 text-muted" style="font-size:0.85rem;">${row.tanggal}</td>
               <td class="fw-medium">${row.nama}</td>
               <td>${row.jenis}</td>
               <td><span class="text-secondary fw-semibold">${row.bulan}</span></td>
-              <td class="fw-semibold text-dark">Rp ${nominalVal.toLocaleString('id-ID')}</td>
+              <td class="fw-semibold text-dark">Rp ${Number(row.nominal).toLocaleString('id-ID')}</td>
               <td><span class="${badgeClass}">${row.status || "-"}</span></td>
               <td><span class="text-muted small"><i class="fa-regular fa-user me-1"></i>${row.pj || "-"}</span></td>
-              <td class="text-center pe-3">${tombolBukti}</td>
+              <td class="text-center pe-3">${htmlBukti}</td>
             </tr>
           `;
         });
-        
-        kontainerRiwayat.innerHTML = rowsHtml;
-        
-        if (jumlahTampil < dataTersaring.length) btnLoadMore.classList.remove('hidden');
-        else btnLoadMore.classList.add('hidden');
+
+        if (jumlahTampil < dataTersaring.length) {
+          btnLoadMore.classList.remove('hidden');
+        } else {
+          btnLoadMore.classList.add('hidden');
+        }
       }
 
       function muatLebihBanyak() {
@@ -319,6 +352,7 @@
         renderTabel();
       }
 
+      // MENCEGAH WEB BERAT SAAT MENCARI (DEBOUNCE)
       function debounceFilter() {
         clearTimeout(filterTimeout);
         filterTimeout = setTimeout(filterTabelRiwayat, 300);
@@ -326,11 +360,14 @@
 
       function filterTabelRiwayat() {
         const input = document.getElementById("kotakCari").value.toLowerCase();
+        
         dataTersaring = semuaDataRiwayat.filter(row => {
-          return (row.nama || "").toLowerCase().includes(input) || 
-                 (row.bulan || "").toLowerCase().includes(input) || 
-                 (row.pj || "").toLowerCase().includes(input);
+          const teksNama = (row.nama || "").toLowerCase();
+          const teksBulan = (row.bulan || "").toLowerCase();
+          const teksPj = (row.pj || "").toLowerCase();
+          return teksNama.includes(input) || teksBulan.includes(input) || teksPj.includes(input);
         });
+
         jumlahTampil = 10; 
         renderTabel();
       }
@@ -348,6 +385,20 @@
         const dd = String(today.getDate()).padStart(2, '0');
         document.getElementById('tanggal').value = `${yyyy}-${mm}-${dd}`;
 
+        const iconForm = document.getElementById('iconForm');
+        const btnSimpan = document.getElementById('btnSimpan');
+        
+        iconForm.className = 'fa-solid fa-file-invoice-dollar fa-xl me-2';
+        btnSimpan.className = 'btn';
+        
+        if (jenis.toLowerCase().includes('dekosan')) {
+          iconForm.classList.add('text-success'); 
+          btnSimpan.classList.add('btn-success'); 
+        } else {
+          iconForm.classList.add('text-primary'); 
+          btnSimpan.classList.add('btn-primary'); 
+        }
+
         const selectBulan = document.getElementById('bulan');
         selectBulan.innerHTML = '<option value="" disabled selected>Memuat bulan...</option>';
         
@@ -355,7 +406,9 @@
           .then(res => res.json())
           .then(bulanList => {
             selectBulan.innerHTML = '<option value="" disabled selected>Pilih bulan pembayaran...</option>';
-            bulanList.forEach(bulan => { selectBulan.innerHTML += `<option value="${bulan}">${bulan}</option>`; });
+            bulanList.forEach(bulan => {
+              selectBulan.innerHTML += `<option value="${bulan}">${bulan}</option>`;
+            });
           })
           .catch(err => selectBulan.innerHTML = `<option value="" disabled selected>Error memuat bulan</option>`);
       }
@@ -370,6 +423,7 @@
 
       function handleFormSubmit() {
         const submitBtn = document.getElementById('btnSimpan');
+        
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Menyimpan...';
         
@@ -398,7 +452,7 @@
             })
             .then(res => res.json())
             .then(res => {
-              if(res.status === 'success'){
+              if(res.status === 'success') {
                 tampilkanNotifikasi("Transaksi Berhasil!", res.message, "sukses");
                 kembaliKeMenu();
               } else {
