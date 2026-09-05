@@ -89,9 +89,9 @@
       
       <!-- AREA HEADER -->
       <div class="d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-start mb-5 gap-3 gap-md-4">
-        <!-- 1. Logo di Samping Kiri -->
+        <!-- Logo di Samping Kiri -->
         <img src="https://github.com/ppdfi/aset/blob/main/LogoWebApp/DEDIKASI.png?raw=true" alt="Logo DEDIKASI" width="130" style="filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.15));">
-        <!-- 2. Area Teks Kanan -->
+        <!-- Area Teks Kanan -->
         <div>
           <h1 class="main-title mb-0" style="font-size: 3.2rem; font-weight: 800; letter-spacing: 1px; line-height: 1;">
             DEDIKASI
@@ -136,7 +136,7 @@
       <div id="formPembayaran" class="card card-custom p-4 mt-4 hidden">
         <div class="d-flex align-items-center mb-4">
           <i id="iconForm" class="fa-solid fa-file-invoice-dollar fa-xl me-2"></i>
-          <h4 id="judulForm" class="mb-0 fw-semibold text-secondary">Form Pembayaran</h4>
+          <h4 id="judulForm" class="mb-0 fw-semibold">Form Pembayaran</h4>
         </div>
         <form id="payForm" onsubmit="handleFormSubmit(); return false;">
           <input type="hidden" id="jenisPembayaran" name="jenisPembayaran">
@@ -174,9 +174,9 @@
               <input type="file" class="form-control" id="buktiBayar" name="buktiBayar" accept="image/*,application/pdf" required>
             </div>
           </div>
-          <div class="d-flex gap-2 justify-content-end">
-            <button type="button" class="btn btn-light" onclick="kembaliKeMenu()">Kembali</button>
-            <button type="submit" id="btnSimpan" class="btn">Simpan Transaksi</button>
+          <div class="d-flex gap-2 justify-content-end mt-2">
+            <button type="button" class="btn btn-light rounded-pill px-4 fw-medium" onclick="kembaliKeMenu()">Kembali</button>
+            <button type="submit" id="btnSimpan" class="btn btn-primary rounded-pill px-4 fw-medium">Simpan Transaksi</button>
           </div>
         </form>
       </div>
@@ -192,7 +192,6 @@
               <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 10px 0 0 10px;">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </span>
-              <!-- Debounce diterapkan disini: oninput="debounceFilter()" -->
               <input type="text" id="kotakCari" class="form-control border-start-0" placeholder="Cari nama, bulan, atau pengurus..." oninput="debounceFilter()" style="border-radius: 0 10px 10px 0; padding: 8px 12px;">
             </div>
           </div>
@@ -211,7 +210,7 @@
             <tbody id="kontainerRiwayat"></tbody>
           </table>
           
-          <!-- TOMBOL LOAD MORE (TAMPILKAN 10 LAGI) -->
+          <!-- TOMBOL LOAD MORE -->
           <div id="loadMoreContainer" class="text-center p-3 hidden border-top">
             <button class="btn btn-outline-primary rounded-pill px-4 fw-medium" onclick="muatLebihBanyak()">
               Tampilkan 10 lagi <i class="fa-solid fa-chevron-down ms-1"></i>
@@ -240,14 +239,14 @@
 
     <script>
       // ===============================================
-      // URL APP SCRIPT BARU SESUAI PERMINTAAN
+      // URL APP SCRIPT BARU
       // ===============================================
       const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxxul62P2N6QFssZhEurhQrb9bVKM_t9kBMnuKh6eezNSdLxHXMb7BDO3N8SU8uLW79_A/exec";
 
       let semuaDataRiwayat = [];
       let dataTersaring = [];
       let jumlahTampil = 10;
-      let filterTimeout; // Untuk fitur debounce agar tidak berat saat mengetik
+      let filterTimeout; 
 
       window.onload = function() {
         muatDropdownSantri();
@@ -352,7 +351,6 @@
         renderTabel();
       }
 
-      // MENCEGAH WEB BERAT SAAT MENCARI (DEBOUNCE)
       function debounceFilter() {
         clearTimeout(filterTimeout);
         filterTimeout = setTimeout(filterTabelRiwayat, 300);
@@ -376,6 +374,7 @@
         document.getElementById('menuUtama').classList.add('hidden');
         document.getElementById('areaRiwayat').classList.add('hidden'); 
         document.getElementById('formPembayaran').classList.remove('hidden');
+        
         document.getElementById('judulForm').innerHTML = 'Form Input ' + jenis;
         document.getElementById('jenisPembayaran').value = jenis;
         
@@ -386,17 +385,18 @@
         document.getElementById('tanggal').value = `${yyyy}-${mm}-${dd}`;
 
         const iconForm = document.getElementById('iconForm');
+        const judulForm = document.getElementById('judulForm');
         const btnSimpan = document.getElementById('btnSimpan');
         
-        iconForm.className = 'fa-solid fa-file-invoice-dollar fa-xl me-2';
-        btnSimpan.className = 'btn';
-        
+        // LOGIKA PERUBAHAN WARNA FORM (HIJAU / BIRU)
         if (jenis.toLowerCase().includes('dekosan')) {
-          iconForm.classList.add('text-success'); 
-          btnSimpan.classList.add('btn-success'); 
+          iconForm.className = 'fa-solid fa-file-invoice-dollar fa-xl me-2 text-success';
+          judulForm.className = 'mb-0 fw-semibold text-success';
+          btnSimpan.className = 'btn btn-success rounded-pill px-4 fw-medium';
         } else {
-          iconForm.classList.add('text-primary'); 
-          btnSimpan.classList.add('btn-primary'); 
+          iconForm.className = 'fa-solid fa-file-invoice-dollar fa-xl me-2 text-primary';
+          judulForm.className = 'mb-0 fw-semibold text-primary';
+          btnSimpan.className = 'btn btn-primary rounded-pill px-4 fw-medium';
         }
 
         const selectBulan = document.getElementById('bulan');
@@ -423,6 +423,7 @@
 
       function handleFormSubmit() {
         const submitBtn = document.getElementById('btnSimpan');
+        const originalClass = submitBtn.className; // Menyimpan warna asli tombol
         
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Menyimpan...';
@@ -465,6 +466,7 @@
             .finally(() => {
               submitBtn.disabled = false;
               submitBtn.innerHTML = 'Simpan Transaksi';
+              submitBtn.className = originalClass; // Kembalikan warna tombol
             });
           };
           reader.readAsDataURL(fileInput);
@@ -472,6 +474,7 @@
           tampilkanNotifikasi("Peringatan", "Mohon pilih file bukti pembayaran terlebih dahulu.", "gagal");
           submitBtn.disabled = false;
           submitBtn.innerHTML = 'Simpan Transaksi';
+          submitBtn.className = originalClass; // Kembalikan warna tombol
         }
       }
     </script>
