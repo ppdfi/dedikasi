@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Judul di Tab Browser -->
+    <title>DEDIKASI PP DFI</title>
+
+    <!-- KODE UNTUK TAMPILAN PRANALA/LINK WA (OPEN GRAPH) -->
+    <meta property="og:title" content="DEDIKASI">
+    <meta property="og:description" content="Data Pelunasan Pendidikan & Dekosan Santri PP DFI">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://github.com/ppdfi/aset/blob/main/LogoWebApp/DEDIKASI.png?raw=true">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://github.com/ppdfi/aset/blob/main/LogoWebApp/DEDIKASI.png?raw=true">
+
+    <!-- CSS Bootstrap & Font/Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+      body { 
+        font-family: 'Poppins', sans-serif; 
+        background-color: #f3f4f6; 
+        color: #333333;
+        padding-top: 30px;
+        padding-bottom: 50px;
+      }
+      .main-title {
+        font-weight: 700;
+        color: #1e3a8a;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+      }
+      .menu-card { 
+        border: none;
+        border-radius: 16px;
+        cursor: pointer; 
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+      }
+      .menu-card:hover { 
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .bg-grad-blue { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+      .bg-grad-green { background: linear-gradient(135deg, #10b981, #047857); }
+      .card-custom {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        background: #ffffff;
+      }
+      .badge-lunas {
+        background-color: #d1fae5 !important;
+        color: #065f46 !important;
+        font-weight: 600; padding: 6px 12px; border-radius: 20px; display: inline-block;
+      }
+      .badge-belum {
+        background-color: #fee2e2 !important;
+        color: #dc2626 !important;
+        font-weight: 600; padding: 6px 12px; border-radius: 20px; border: 1px solid #fca5a5; display: inline-block;
+      }
+      .hidden { display: none !important; }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      
+      <!-- AREA HEADER -->
+      <div class="d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-start mb-5 gap-3 gap-md-4">
+        <img src="https://github.com/ppdfi/aset/blob/main/LogoWebApp/DEDIKASI.png?raw=true" alt="Logo DEDIKASI" width="130" style="filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.15));">
+        <div>
+          <h1 class="main-title mb-0" style="font-size: 3.2rem; font-weight: 800; letter-spacing: 1px; line-height: 1;">DEDIKASI</h1>
+          <h5 class="fw-bold mt-2 mb-3" style="color: #1e3a8a; font-size: 1.15rem; letter-spacing: 0.5px;">Data Pelunasan Pendidikan & Dekosan Santri</h5>
+          <div class="d-inline-flex align-items-center bg-white px-3 py-2 rounded-pill shadow-sm border" style="border-color: #e5e7eb !important;">
+            <i class="fa-solid fa-mosque fs-6 me-2" style="color: #10b981;"></i>
+            <span class="text-secondary fw-semibold" style="font-size: 0.95rem;">Pondok Pesantren Darul Fawaid Ilmiyah</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- MENU UTAMA -->
+      <div id="menuUtama" class="row justify-content-center g-4">
+        <div class="col-md-5">
+          <div class="card p-5 text-white menu-card bg-grad-blue" onclick="bukaForm('Biaya Pendidikan (BP)')">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h3 class="fw-semibold mb-1">Biaya Pendidikan</h3>
+                <p class="mb-0 opacity-75 text-sm">SPP Pesantren, Madin, dan Formal</p>
+              </div>
+              <i class="fa-solid fa-graduation-cap fa-3x opacity-50"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="card p-5 text-white menu-card bg-grad-green" onclick="bukaForm('Dekosan Dapur')">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h3 class="fw-semibold mb-1">Dekosan Dapur</h3>
+                <p class="mb-0 opacity-75 text-sm">Akomodasi Biaya Makan Santri</p>
+              </div>
+              <i class="fa-solid fa-utensils fa-3x opacity-50"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM PEMBAYARAN -->
+      <div id="formPembayaran" class="card card-custom p-4 mt-4 hidden">
+        <div class="d-flex align-items-center mb-4">
+          <i id="iconForm" class="fa-solid fa-file-invoice-dollar fa-xl me-2"></i>
+          <h4 id="judulForm" class="mb-0 fw-semibold text-secondary">Form Pembayaran</h4>
+        </div>
+        <form id="payForm" onsubmit="handleFormSubmit(); return false;">
+          <input type="hidden" id="jenisPembayaran" name="jenisPembayaran">
+          
+          <div class="row g-3">
+            <div class="col-md-12 mb-3">
+              <label class="form-label"><i class="fa-solid fa-calendar-day me-1"></i> Tanggal Transaksi</label>
+              <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6 mb-3">
+              <label class="form-label"><i class="fa-solid fa-user me-1"></i> Nama Santri</label>
+              <select class="form-select" id="namaSantri" name="namaSantri" required></select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label"><i class="fa-solid fa-calendar-days me-1"></i> Bulan</label>
+              <select class="form-select" id="bulan" name="bulan" required></select>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Nominal (Rp) - Tanpa Titik</label>
+              <input type="number" class="form-control" id="nominal" name="nominal" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Penanggung Jawab</label>
+              <input type="text" class="form-control" id="pj" name="pj" required>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-12 mb-4">
+              <label class="form-label">Unggah Bukti Pembayaran</label>
+              <input type="file" class="form-control" id="buktiBayar" name="buktiBayar" accept="image/*,application/pdf" required>
+            </div>
+          </div>
+          <div class="d-flex gap-2 justify-content-end">
+            <button type="button" class="btn btn-light" onclick="kembaliKeMenu()">Kembali</button>
+            <button type="submit" id="btnSimpan" class="btn btn-primary">Simpan Transaksi</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- AREA RIWAYAT & TABEL -->
+      <div id="areaRiwayat" class="mt-5">
+        <div class="row align-items-center mb-3 g-2">
+          <div class="col-md-4">
+            <h5 class="fw-semibold mb-0 text-dark"><i class="fa-solid fa-clock-rotate-left me-2 text-primary"></i>Riwayat Pembayaran Terbaru</h5>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 10px 0 0 10px;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </span>
+              <input type="text" id="kotakCari" class="form-control border-start-0" placeholder="Cari nama, bulan, atau pengurus..." oninput="debounceFilter()" style="border-radius: 0 10px 10px 0; padding: 8px 12px;">
+            </div>
+          </div>
+          <div class="col-md-2 text-md-end">
+            <button class="btn btn-sm btn-outline-secondary border-0" onclick="muatTabelRiwayat()"><i class="fa-solid fa-rotate"></i> Refresh</button>
+          </div>
+        </div>
+        
+        <div class="table-responsive card card-custom p-2">
+          <table class="table table-hover align-middle mb-0" id="tabelDataRiwayat">
+            <thead>
+              <tr>
+                <th class="ps-3">Tanggal</th><th>Nama Santri</th><th>Jenis</th><th>Bulan</th><th>Nominal</th><th>Status</th><th>Pengurus</th><th class="text-center pe-3">Bukti</th>
+              </tr>
+            </thead>
+            <tbody id="kontainerRiwayat"></tbody>
+          </table>
+          
+          <div id="loadMoreContainer" class="text-center p-3 hidden border-top">
+            <button class="btn btn-outline-primary rounded-pill px-4 fw-medium" onclick="muatLebihBanyak()">
+              Tampilkan 10 lagi <i class="fa-solid fa-chevron-down ms-1"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL NOTIFIKASI -->
+    <div class="modal fade" id="notifModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
+          <div class="modal-body text-center p-4">
+            <div id="notifIcon" class="mb-3"></div>
+            <h4 id="notifTitle" class="fw-bold mb-2"></h4>
+            <p id="notifMessage" class="text-secondary mb-4"></p>
+            <button type="button" class="btn btn-light rounded-pill px-4 fw-medium shadow-sm" data-bs-dismiss="modal">Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // URL DEPLOYMENT APPS SCRIPT ANDA
+      const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxxul62P2N6QFssZhEurhQrb9bVKM_t9kBMnuKh6eezNSdLxHXMb7BDO3N8SU8uLW79_A/exec";
+
+      let semuaDataRiwayat = [];
+      let dataTersaring = [];
+      let jumlahTampil = 10;
+      let filterTimeout; 
+
+      window.onload = function() {
+        muatDropdownSantri();
+        muatTabelRiwayat();
+      };
+
+      function tampilkanNotifikasi(judul, pesan, tipe) {
+        let iconHTML = tipe === 'sukses' 
+          ? '<i class="fa-solid fa-circle-check text-success" style="font-size: 4rem;"></i>' 
+          : '<i class="fa-solid fa-circle-xmark text-danger" style="font-size: 4rem;"></i>';
+        
+        document.getElementById('notifIcon').innerHTML = iconHTML;
+        document.getElementById('notifTitle').innerText = judul;
+        document.getElementById('notifMessage').innerText = pesan;
+
+        const notifModal = new bootstrap.Modal(document.getElementById('notifModal'));
+        notifModal.show();
+      }
+
+      function muatDropdownSantri() {
+        const select = document.getElementById('namaSantri');
+        select.innerHTML = '<option value="" disabled selected>Memuat nama santri...</option>';
+        
+        fetch(APP_SCRIPT_URL + "?action=getDaftarSantri")
+          .then(res => res.json())
+          .then(santriList => {
+            select.innerHTML = '<option value="" disabled selected>Pilih nama santri...</option>';
+            santriList.forEach(nama => { select.innerHTML += `<option value="${nama}">${nama}</option>`; });
+          })
+          .catch(err => select.innerHTML = `<option value="" disabled selected>Error memuat data</option>`);
+      }
+
+      function muatTabelRiwayat() {
+        const kontainerRiwayat = document.getElementById('kontainerRiwayat');
+        if (document.getElementById('kotakCari')) document.getElementById('kotakCari').value = ''; 
+        
+        kontainerRiwayat.innerHTML = '<tr><td colspan="8" class="text-center text-muted my-4"><i class="fa-solid fa-spinner fa-spin me-2"></i>Memuat data dari server...</td></tr>';
+        document.getElementById('loadMoreContainer').classList.add('hidden');
+
+        fetch(APP_SCRIPT_URL + "?action=getRiwayatPembayaran")
+          .then(res => res.json())
+          .then(data => {
+            semuaDataRiwayat = data;
+            dataTersaring = data;
+            jumlahTampil = 10; 
+            renderTabel();
+          })
+          .catch(err => kontainerRiwayat.innerHTML = '<tr><td colspan="8" class="text-center text-danger">Gagal memuat tabel riwayat.</td></tr>');
+      }
+
+      function renderTabel() {
+        const kontainerRiwayat = document.getElementById('kontainerRiwayat');
+        const btnLoadMore = document.getElementById('loadMoreContainer');
+        
+        if (dataTersaring.length === 0) {
+          kontainerRiwayat.innerHTML = '<tr><td colspan="8" class="text-center py-4 text-muted">Belum ada riwayat atau data tidak ditemukan.</td></tr>';
+          btnLoadMore.classList.add('hidden');
+          return;
+        }
+
+        const dataDitampilkan = dataTersaring.slice(0, jumlahTampil);
+        let rowsHtml = '';
+
+        dataDitampilkan.forEach(row => {
+          const statusVal = row.status ? row.status.toLowerCase() : "";
+          const isLunas = statusVal.includes('lunas');
+          const badgeClass = isLunas ? 'badge-lunas' : 'badge-belum';
+          const nominalVal = Number(row.nominal) || 0;
+          
+          let tombolBukti = row.bukti && row.bukti !== "#" 
+            ? `<a href="${row.bukti}" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3"><i class="fa-solid fa-eye me-1"></i> Lihat</a>`
+            : `<span class="text-muted small">Tanpa Bukti</span>`;
+            
+          rowsHtml += `
+            <tr>
+              <td class="ps-3 text-muted" style="font-size:0.85rem;">${row.tanggal}</td>
+              <td class="fw-medium">${row.nama}</td>
+              <td>${row.jenis}</td>
+              <td><span class="text-secondary fw-semibold">${row.bulan}</span></td>
+              <td class="fw-semibold text-dark">Rp ${nominalVal.toLocaleString('id-ID')}</td>
+              <td><span class="${badgeClass}">${row.status || "-"}</span></td>
+              <td><span class="text-muted small"><i class="fa-regular fa-user me-1"></i>${row.pj || "-"}</span></td>
+              <td class="text-center pe-3">${tombolBukti}</td>
+            </tr>
+          `;
+        });
+        
+        kontainerRiwayat.innerHTML = rowsHtml;
+        
+        if (jumlahTampil < dataTersaring.length) btnLoadMore.classList.remove('hidden');
+        else btnLoadMore.classList.add('hidden');
+      }
+
+      function muatLebihBanyak() {
+        jumlahTampil += 10;
+        renderTabel();
+      }
+
+      function debounceFilter() {
+        clearTimeout(filterTimeout);
+        filterTimeout = setTimeout(filterTabelRiwayat, 300);
+      }
+
+      function filterTabelRiwayat() {
+        const input = document.getElementById("kotakCari").value.toLowerCase();
+        dataTersaring = semuaDataRiwayat.filter(row => {
+          return (row.nama || "").toLowerCase().includes(input) || 
+                 (row.bulan || "").toLowerCase().includes(input) || 
+                 (row.pj || "").toLowerCase().includes(input);
+        });
+        jumlahTampil = 10; 
+        renderTabel();
+      }
+
+      function bukaForm(jenis) {
+        document.getElementById('menuUtama').classList.add('hidden');
+        document.getElementById('areaRiwayat').classList.add('hidden'); 
+        document.getElementById('formPembayaran').classList.remove('hidden');
+        document.getElementById('judulForm').innerHTML = 'Form Input ' + jenis;
+        document.getElementById('jenisPembayaran').value = jenis;
+        
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        document.getElementById('tanggal').value = `${yyyy}-${mm}-${dd}`;
+
+        const selectBulan = document.getElementById('bulan');
+        selectBulan.innerHTML = '<option value="" disabled selected>Memuat bulan...</option>';
+        
+        fetch(APP_SCRIPT_URL + "?action=getDaftarBulanCustom&jenis=" + encodeURIComponent(jenis))
+          .then(res => res.json())
+          .then(bulanList => {
+            selectBulan.innerHTML = '<option value="" disabled selected>Pilih bulan pembayaran...</option>';
+            bulanList.forEach(bulan => { selectBulan.innerHTML += `<option value="${bulan}">${bulan}</option>`; });
+          })
+          .catch(err => selectBulan.innerHTML = `<option value="" disabled selected>Error memuat bulan</option>`);
+      }
+
+      function kembaliKeMenu() {
+        document.getElementById('menuUtama').classList.remove('hidden');
+        document.getElementById('areaRiwayat').classList.remove('hidden'); 
+        document.getElementById('formPembayaran').classList.add('hidden');
+        document.getElementById('payForm').reset();
+        muatTabelRiwayat(); 
+      }
+
+      function handleFormSubmit() {
+        const submitBtn = document.getElementById('btnSimpan');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Menyimpan...';
+        
+        const fileInput = document.getElementById('buktiBayar').files[0];
+        const nominalBulat = Math.round(Number(document.getElementById('nominal').value));
+        
+        if (fileInput) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const dataForm = {
+              jenisPembayaran: document.getElementById('jenisPembayaran').value,
+              namaSantri: document.getElementById('namaSantri').value,
+              bulan: document.getElementById('bulan').value,
+              nominal: nominalBulat, 
+              pj: document.getElementById('pj').value, 
+              tanggal: document.getElementById('tanggal').value,
+              fileData: e.target.result.split(',')[1], 
+              fileName: fileInput.name,
+              fileMime: fileInput.type
+            };
+            
+            fetch(APP_SCRIPT_URL, {
+              method: 'POST',
+              body: JSON.stringify({ action: "prosesPembayaranV2", payload: dataForm }),
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' } 
+            })
+            .then(res => res.json())
+            .then(res => {
+              if(res.status === 'success'){
+                tampilkanNotifikasi("Transaksi Berhasil!", res.message, "sukses");
+                kembaliKeMenu();
+              } else {
+                tampilkanNotifikasi("Terjadi Kesalahan", res.message, "gagal");
+              }
+            })
+            .catch(err => {
+              tampilkanNotifikasi("Terjadi Kesalahan", "Gagal tersambung ke server Google. Silakan coba lagi.", "gagal");
+            })
+            .finally(() => {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = 'Simpan Transaksi';
+            });
+          };
+          reader.readAsDataURL(fileInput);
+        } else {
+          tampilkanNotifikasi("Peringatan", "Mohon pilih file bukti pembayaran terlebih dahulu.", "gagal");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Simpan Transaksi';
+        }
+      }
+    </script>
+  </body>
+</html>
